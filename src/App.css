@@ -1,0 +1,13 @@
+
+.film h2 {
+    text-align: center;
+}
+
+
+.film:hover {
+    cursor: pointer;
+}
+
+.film:hover h2 {
+    color: cornflowerblue;
+}
