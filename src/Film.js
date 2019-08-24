@@ -12,6 +12,15 @@ class Film extends React.Component {
         }
     }
 
+    static getDerivedStateFromProps(newProps, state) {
+        return {
+            name: newProps.name,
+            desc: newProps.desc,
+            pathname: newProps.pathname,
+            url: newProps.url
+        }
+    }
+
     go = () => {
         window.location = this.state.pathname
     };

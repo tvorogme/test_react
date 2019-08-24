@@ -6,6 +6,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            search: "",
             films: [
                 {
                     name: 'Lol',
@@ -14,13 +15,13 @@ class App extends React.Component {
                     pathname: '/lol'
                 },
                 {
-                    name: 'Lol1',
+                    name: 'Test',
                     url: 'http://ya.ru/',
                     desc: "Самый крутой фильм",
                     pathname: '/lol1'
                 },
                 {
-                    name: 'Lol2',
+                    name: 'Value',
                     url: 'http://ya.ru/',
                     desc: "Самый крутой фильм",
                     pathname: '/lol2'
@@ -35,16 +36,28 @@ class App extends React.Component {
         return filtered.length > 0 ? filtered[0] : null
     };
 
+    handleChange = (el) => {
+        this.setState({[el.target.name]: el.target.value.toLocaleLowerCase()});
+    };
+
     render() {
         if (window.location.pathname === "/") {
-            return <ul>
-                {this.state.films.map((film, index) =>
-                    <Film desc={film.desc}
-                          name={film.name}
-                          url={film.url}
-                          pathname={film.pathname}
-                          key={index}/>)}
-            </ul>
+            return <div>
+
+                <label htmlFor={'test'}>Test:</label>
+                <input name={'search'} id={'test'} onChange={this.handleChange}/>
+
+
+                <ul>
+                    {this.state.films.filter(el => el.name.toLocaleLowerCase().includes(this.state.search)).map(
+                        (film, index) =>
+                            <Film desc={film.desc}
+                                  name={film.name}
+                                  url={film.url}
+                                  pathname={film.pathname}
+                                  key={index}/>)}
+                </ul>
+            </div>
         } else {
             const film = this.getFilmByPathname();
 
